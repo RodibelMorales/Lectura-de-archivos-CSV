@@ -6,13 +6,16 @@
 	{
 		private $conectaDB;
 			
-			function __construct(){
+			public function __construct(){
 				$this->conectaDB=mysqli_connect("localhost","root","","db_csv");
 			}
-			public function addInfoCSV($data){
-				echo "<pre>";
-					print_r($data);
-				echo "</prep>";
+				public function addInfoCSV($data){
+					echo "<pre>";
+						print_r($data);
+					echo "</prep>";
+				}
+			public function __destruct(){
+				mysqli_close($this->conectaDB);
 			}
 	}
 
