@@ -9,10 +9,14 @@
 			public function __construct(){
 				$this->conectaDB=mysqli_connect("localhost","root","","db_csv");
 			}
-				public function addInfoCSV($data){
-					echo "<pre>";
-						print_r($data);
-					echo "</prep>";
+				public function addInfoCSV($sql){
+					echo "</br>";
+					$saveinfo=mysqli_query($this->conectaDB,"INSERT INTO infocsv (request_id,contact_sessionId,contact_name,contact_firstName,contact_lastName,contact_email,contact_phone,contact_message,contact_pageHistory,contact_areaProperty,contact_typeProperty,contact_locationProperty,contact_rangeProperty,contact_mls,contact_mlsUrl,contact_mlsAgent,contact_pdfCode,request_name,request_channel,request_channelDetail,request_source,request_url,request_page,request_date,request_status,request_persona,request_asignedTo,request_attended,request_idioma,request_optin1,request_optin2) VALUES ($sql) ");
+					if ($saveinfo) {
+						echo "Listo";
+					}else{
+						echo "Error al guardar informacion : </br> INSERT INTO infocsv (request_id,contact_sessionId,contact_name,contact_firstName,contact_lastName,contact_email,contact_phone,contact_message,contact_pageHistory,contact_areaProperty,contact_typeProperty,contact_locationProperty,contact_rangeProperty,contact_mls,contact_mlsUrl,contact_mlsAgent,contact_pdfCode,request_name,request_channel,request_channelDetail,request_source,request_url,request_page,request_date,request_status,request_persona,request_asignedTo,request_attended,request_idioma,request_optin1,request_optin2) VALUES ($sql)";
+					}
 				}
 			public function __destruct(){
 				mysqli_close($this->conectaDB);
