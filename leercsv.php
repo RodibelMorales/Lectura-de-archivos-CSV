@@ -36,19 +36,39 @@
 							if ($fistline==0) {
 								echo "Se omitio la primer linea </br>";
 							}else{
+								/*Limpieza de campos*/
 								$find = array('/[()-]/', '/[\-]+/', '/&lt;{^&gt;*&gt;/');
  								$repl = array('', '-', '');
 								$datos=preg_replace($find, $repl,$data);
-								$info="'".$data[0]."','".$data[1]."','".$data[2]."','".$data[3]."','".$data[4]."','".$data[5]."',
-									  '".$data[6]."','".$data[7]."','".$data[8]."','".$data[9]."','".$data[10]."','".$data[11]."',
-									  '".$data[12]."','".$data[13]."','".$data[14]."','".$data[15]."','".$data[16]."','".$data[17]."',
-									  '".$data[18]."','".$data[19]."','".$data[20]."','".$data[21]."','".$data[22]."','".$data[23]."',
-									  '".$data[24]."','".$data[25]."','".$data[26]."','".$data[27]."','".$data[28]."','".$data[29]."',
-									  '".$data[30]."'";
-								
-								echo "<pre>";
-									print_r($datos);
-								echo "</pre>";
+								/*validacion de correo electronico*/
+								if(filter_var($datos[5], FILTER_VALIDATE_EMAIL)){
+									$info="'".$datos[0]."','".$datos[1]."','".$datos[2]."','".$datos[3]."','".$datos[4]."','".$datos[5]."',
+									  '".$datos[6]."','".$datos[7]."','".$datos[8]."','".$datos[9]."','".$datos[10]."','".$datos[11]."',
+									  '".$datos[12]."','".$datos[13]."','".$datos[14]."','".$datos[15]."','".$datos[16]."','".$datos[17]."',
+									  '".$datos[18]."','".$datos[19]."','".$datos[20]."','".$datos[21]."','".$datos[22]."','".$datos[23]."',
+									  '".$datos[24]."','".$datos[25]."','".$datos[26]."','".$datos[27]."','".$datos[28]."','".$datos[29]."',
+									  '".$datos[30]."'";
+									  $addData->addInfoCSV($info);
+									if ($datos[2]=='') {
+										echo "El campo contact_name esta vacio </br>";
+										if($datos[3]==''){
+											echo "el campo first name vacio </br>";
+										}elseif ($datos[4]=='') {
+											echo "el campo contact_lastName </br>";
+										}else{
+											$info="'".$datos[0]."','".$datos[1]."','".$datos[2]."','".$datos[3]."','".$datos[4]."','".$datos[5]."',
+										  	'".$datos[6]."','".$datos[7]."','".$datos[8]."','".$datos[9]."','".$datos[10]."','".$datos[11]."',
+										 	 '".$datos[12]."','".$datos[13]."','".$datos[14]."','".$datos[15]."','".$datos[16]."','".$datos[17]."',
+										 	 '".$datos[18]."','".$datos[19]."','".$datos[20]."','".$datos[21]."','".$datos[22]."','".$datos[23]."',
+										  	'".$datos[24]."','".$datos[25]."','".$datos[26]."','".$datos[27]."','".$datos[28]."','".$datos[29]."',
+										  	'".$datos[30]."'";
+									  		$addData->addInfoCSV($info);
+										}
+									}
+								}else{
+									echo "Upss el correo no es valido </br>";
+									echo "-------------------------------> </br>";
+								}
 								//En caso contrario enviamos la información a la funcion para poder insertarla en la DB
 								//$addData->addInfoCSV($sql);
 								

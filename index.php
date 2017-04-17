@@ -22,9 +22,6 @@
 			</div>
 		</section>
 	</section>
-
-
-
 <script src="js/jquery-3.2.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
