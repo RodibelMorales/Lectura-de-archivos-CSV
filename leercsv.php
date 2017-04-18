@@ -15,9 +15,9 @@
 			//Indicamos la ruta con el nombre del archivo
 			$destino = $ruta.$nameFile;
 			//Verificamos si el archivo existe en el servidor de ser el resultado TRUE indicamos al usario que existe y lo redirigimos al index. 
-			//if (file_exists($destino)) {
+			if (file_exists($destino)) {
 				//echo "<script language='JavaScript'> alert('El archivo ya existe, intenta con otro'); window.location='index.php';</script>";
-			//}else{
+			}else{
 				//Si el archivo no existe procedemos a validar el tipo de archivo a subir
 				if ($_FILES['info']['type']=="application/vnd.ms-excel"){
 					//Si es el tipo de arhico permitido lo copiamos al servidor
@@ -42,13 +42,17 @@
 								$datos=preg_replace($find, $repl,$data);
 								/*validacion de correo electronico*/
 								if(filter_var($datos[5], FILTER_VALIDATE_EMAIL)){
+									/*variable para validar el correo y no duplicar registros*/
+									$correo=$datos[5];
+									/*Values para realizar el insert a la DB*/
 									$info="'".$datos[0]."','".$datos[1]."','".$datos[2]."','".$datos[3]."','".$datos[4]."','".$datos[5]."',
 									  '".$datos[6]."','".$datos[7]."','".$datos[8]."','".$datos[9]."','".$datos[10]."','".$datos[11]."',
 									  '".$datos[12]."','".$datos[13]."','".$datos[14]."','".$datos[15]."','".$datos[16]."','".$datos[17]."',
 									  '".$datos[18]."','".$datos[19]."','".$datos[20]."','".$datos[21]."','".$datos[22]."','".$datos[23]."',
 									  '".$datos[24]."','".$datos[25]."','".$datos[26]."','".$datos[27]."','".$datos[28]."','".$datos[29]."',
 									  '".$datos[30]."'";
-									  $addData->addInfoCSV($info);
+
+									  $addData->addInfoCSV($info,$correo);
 									if ($datos[2]=='') {
 										echo "El campo contact_name esta vacio </br>";
 										if($datos[3]==''){
@@ -62,7 +66,7 @@
 										 	 '".$datos[18]."','".$datos[19]."','".$datos[20]."','".$datos[21]."','".$datos[22]."','".$datos[23]."',
 										  	'".$datos[24]."','".$datos[25]."','".$datos[26]."','".$datos[27]."','".$datos[28]."','".$datos[29]."',
 										  	'".$datos[30]."'";
-									  		$addData->addInfoCSV($info);
+									  		$addData->addInfoCSV($info,$correo);
 										}
 									}
 								}else{
@@ -82,7 +86,7 @@
 				}else{
 					echo "El tipo de archio seleccionado no esta permitido";
 				}
-			//}
+			}
 		}else{
 			header("Location:index.php");
 		}
